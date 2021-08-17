@@ -1,4 +1,4 @@
-package com.alavel.zoo_clinic;
+package com.hs.zoo_clinic.zoo_clinic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
