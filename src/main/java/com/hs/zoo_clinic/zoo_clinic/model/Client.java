@@ -11,8 +11,11 @@ import javax.persistence.*;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "login")
     private String login;
+    @Column(name="password")
     private String password;
 }
 

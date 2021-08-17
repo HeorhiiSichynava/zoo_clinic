@@ -1,6 +1,6 @@
 package com.hs.zoo_clinic.zoo_clinic.service.impl;
 
-import com.hs.zoo_clinic.zoo_clinic.dao.AuthResponse;
+import com.hs.zoo_clinic.zoo_clinic.dto.AuthResponse;
 import com.hs.zoo_clinic.zoo_clinic.dao.RepositoryClient;
 import com.hs.zoo_clinic.zoo_clinic.dto.AuthClientDto;
 import com.hs.zoo_clinic.zoo_clinic.dto.ClientDto;
@@ -25,37 +25,39 @@ public class ServiceClientImpl implements ServiceClient {
 
     @Override
     public ClientDto save(ClientDto clientDto) {
-        log.info("ServiceClient->save to repository");
-        if (isNull(repositoryClient.findByLogin(clientDto.getLogin()))) {
+        String nameMethod = "ClientDto save(ClientDto clientDto)";
+         if (isNull(repositoryClient.findByLogin(clientDto.getLogin()))) {
             Client client = repositoryClient.save(converterModelToDto.convertClientDtoToClient(clientDto));
+            log.info(nameMethod+": good request"+ServiceClient.class);
             return converterModelToDto.convertClientToClientDto(client);
         }
+        log.info(nameMethod+": bad request");
         return null;
     }
 
     @Override
     public ClientDto findByLogin(String login) {
+        String nameMethod = "ClientDto findByLogin(String login)";
         Client findClient = repositoryClient.findByLogin(login);
-        log.info("ServiceClient->findByLogin");
         if (!isNull(findClient)) {
-            log.info("ServiceClient->findByLoginAndPassword-> good request");
+            log.info(nameMethod+": good request"+ServiceClient.class);
             return converterModelToDto.convertClientToClientDto(findClient);
         }
-        log.info("ServiceClient->findByLoginAndPassword-> bad request");
+        log.info(nameMethod+": bad request");
         return null;
     }
 
     @Override
     public AuthResponse findByLoginAndPassword(AuthClientDto auth) {
+        String nameMethod = "AuthResponse findByLoginAndPassword(AuthClientDto auth)";
         Client findClient = repositoryClient.findByLogin(auth.getLogin());
-        log.info("ServiceClient->findByLoginAndPassword");
         if (!isNull(findClient)) {
-            if (findClient.getPassword() == auth.getPassword()) {
-                log.info("ServiceClient->findByLoginAndPassword-> good request");
+            if (findClient.getPassword().equals(auth.getPassword())) {
+                log.info(nameMethod+": good request"+ServiceClient.class);
                 return new AuthResponse(converterModelToDto.convertClientToClientDto(findClient).getLogin());
             }
         }
-        log.info("ServiceClient->findByLoginAndPassword-> bad request");
+        log.info(nameMethod+": bad request");
         return null;
     }
 
