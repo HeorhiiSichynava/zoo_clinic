@@ -1,8 +1,8 @@
 package com.hs.zoo_clinic.zoo_clinic.service;
 
-import com.hs.zoo_clinic.zoo_clinic.dto.AuthResponse;
-import com.hs.zoo_clinic.zoo_clinic.dto.AuthClientDto;
-import com.hs.zoo_clinic.zoo_clinic.dto.ClientDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthResponse;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthClientDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.ClientDto;
 
 public interface ServiceClient {
     ClientDto save(ClientDto clientDto);

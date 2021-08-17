@@ -1,6 +1,6 @@
 package com.hs.zoo_clinic.zoo_clinic.dao;
 
-import com.hs.zoo_clinic.zoo_clinic.dto.ClientDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.ClientDto;
 import com.hs.zoo_clinic.zoo_clinic.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.hs.zoo_clinic.zoo_clinic.dto;
+package com.hs.zoo_clinic.zoo_clinic.dto.client;
 
 import lombok.Builder;
 import lombok.Data;

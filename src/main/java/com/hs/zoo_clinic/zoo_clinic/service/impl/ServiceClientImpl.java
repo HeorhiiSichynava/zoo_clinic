@@ -1,11 +1,11 @@
 package com.hs.zoo_clinic.zoo_clinic.service.impl;
 
-import com.hs.zoo_clinic.zoo_clinic.dto.AuthResponse;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthResponse;
 import com.hs.zoo_clinic.zoo_clinic.dao.RepositoryClient;
-import com.hs.zoo_clinic.zoo_clinic.dto.AuthClientDto;
-import com.hs.zoo_clinic.zoo_clinic.dto.ClientDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthClientDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.ClientDto;
 import com.hs.zoo_clinic.zoo_clinic.model.Client;
-import com.hs.zoo_clinic.zoo_clinic.model.ConverterModelToDto;
+import com.hs.zoo_clinic.zoo_clinic.model.converter.ConverterModelToDto;
 import com.hs.zoo_clinic.zoo_clinic.service.ServiceClient;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
