@@ -12,5 +12,5 @@ public class AnimalDto {
     private String typeOfAnimal;
     private Integer ageOfAnimal;
     private Integer weightOfAnimal;
-    private Client client;
+    private String loginOfClient;
 }

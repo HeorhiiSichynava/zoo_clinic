@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RepositoryAnimal extends JpaRepository<Animal,Long> {
-    List<Animal> findByNameOfAnimal(String name);
+    List<Animal> findByClient_Id(Long id);
 }

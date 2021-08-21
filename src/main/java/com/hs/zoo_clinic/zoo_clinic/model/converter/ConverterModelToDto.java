@@ -1,6 +1,7 @@
 package com.hs.zoo_clinic.zoo_clinic.model.converter;
 
 import com.hs.zoo_clinic.zoo_clinic.dto.client.AnimalDto;
+import com.hs.zoo_clinic.zoo_clinic.dto.client.AnimalResponse;
 import com.hs.zoo_clinic.zoo_clinic.dto.client.ClientDto;
 import com.hs.zoo_clinic.zoo_clinic.model.Animal;
 import com.hs.zoo_clinic.zoo_clinic.model.Client;
@@ -15,14 +16,17 @@ public class ConverterModelToDto implements ConverterDtoClient, ConverterDtoAnim
     public Client convertClientDtoToClient(ClientDto clientDto){
         Client client = new Client();
         client.setId(clientDto.getId());
+        client.setName(clientDto.getName());
         client.setLogin(clientDto.getLogin());
         client.setPassword(clientDto.getPassword());
+        client.setAnimals(clientDto.getAnimalDtoList());
         return client;
     }
     @Override
     public ClientDto convertClientToClientDto(Client client){
         ClientDto clientDto = ClientDto.builder()
                 .id(client.getId())
+                .name(client.getName())
                 .login(client.getLogin())
                 .password(client.getPassword())
                 .build();
@@ -49,7 +53,20 @@ public class ConverterModelToDto implements ConverterDtoClient, ConverterDtoAnim
                 .typeOfAnimal(animal.getTypeOfAnimal())
                 .ageOfAnimal(animal.getAgeOfAnimal())
                 .weightOfAnimal(animal.getWeightOfAnimal())
+                .loginOfClient(animal.getClient().getLogin())   //login
                 .build();
         return animalDto;
+    }
+
+    @Override
+    public AnimalResponse convertAnimalToAnimalResponse(Animal animal) {
+        AnimalResponse animalResponse = AnimalResponse.builder()
+                .animal_id(animal.getId())
+                .nameOfAnimal(animal.getNameOfAnimal())
+                .client_id(animal.getClient().getId())
+                .typeOfAnimal(animal.getTypeOfAnimal())
+                .nameOfClient(animal.getClient().getName())
+                .build();
+        return animalResponse;
     }
 }

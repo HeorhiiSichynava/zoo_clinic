@@ -24,6 +24,5 @@ public class Animal {
     private Integer weightOfAnimal;
     @ManyToOne
     @JoinColumn(name="client_id", nullable=false)
-    @Column(name = "owner_of_animal")
     private Client client;
 }

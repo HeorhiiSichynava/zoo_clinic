@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 @Table(name = "client")
 @Entity
@@ -15,13 +17,19 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "name")
+    private String name;
     @Column(name = "login")
     private String login;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "client")
-    @Column(name = "pet")
-    private HashSet<Animal> animalHashSet;
+    private List<Animal> animals = new ArrayList<>();
+
+    public void addAnimal(Animal animal) {
+        this.animals.add(animal);
+    }
+
 }
 
 
