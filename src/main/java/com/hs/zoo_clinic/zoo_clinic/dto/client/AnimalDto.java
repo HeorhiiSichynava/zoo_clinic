@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 @Builder
 public class AnimalDto {
-    private Long id;
-    private String nameOfAnimal;
-    private String typeOfAnimal;
-    private Integer ageOfAnimal;
-    private Integer weightOfAnimal;
-    private String loginOfClient;
+    private Long    id              ;
+    private String  nameOfAnimal    ;
+    private String  typeOfAnimal    ;
+    private Integer ageOfAnimal     ;
+    private Integer weightOfAnimal  ;
+    private String  loginOfClient   ;
 }

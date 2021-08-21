@@ -3,25 +3,23 @@
 
 <head>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script  defer src="recvest_methods.js"></script>
-    <script defer src="form.js>"></script>
+    <script  defer src="request.js"></script>
     <title>Zoo clinic</title>
 </head>
 <body onload="registrationResult()"><br>
+<button type="button" onclick="regForm()">registration</button>
+<button type="button" onclick="addAnimalForm()">add pet</button>
+<button type="button" onclick="logForm()">log out</button>
+
+
 <div id="table_response" class="table"></div>
-<br><br>
+<br>
 <button type="button" onclick='registrationResult()'>update table clients</button>
 <br><br>
-<input type='text' id='find_by_client_id' value=""/> client id<br><br>
+<input type='text' id='find_by_client_id' value=""/> client id
 
 <button type="button" value="Send" name="Send" onclick='findByClientId()'>find</button>
 <br>
-    <input type='text'      id='client_name'     value=''/> name    <br>
-    <input type='text'      id='client_login'    value=''> login   <br>
-    <input type='password'  id='client_password' value=''> password<br>
-<button type='button' onclick='registration()'>
-    Registration
-</button>
 
 </body>
 </html>
