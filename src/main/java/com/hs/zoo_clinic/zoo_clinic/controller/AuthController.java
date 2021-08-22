@@ -1,4 +1,4 @@
-package com.hs.zoo_clinic.zoo_clinic.controller.authorization;
+package com.hs.zoo_clinic.zoo_clinic.controller;
 
 import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthResponse;
 import com.hs.zoo_clinic.zoo_clinic.dto.client.AuthClientDto;

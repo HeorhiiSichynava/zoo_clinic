@@ -1,4 +1,4 @@
-package com.hs.zoo_clinic.zoo_clinic.controller.registration;
+package com.hs.zoo_clinic.zoo_clinic.controller;
 
 import com.hs.zoo_clinic.zoo_clinic.dto.client.ClientDto;
 import com.hs.zoo_clinic.zoo_clinic.service.ServiceClient;
@@ -13,20 +13,26 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class RegistrationController {
+public class ClientController {
 
     ServiceClient serviceClient;
 
     @Autowired
-    public RegistrationController(ServiceClient serviceClient) {
+    public ClientController(ServiceClient serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     @PostMapping("/registration")
     ClientDto registration(@RequestBody ClientDto clientDto) {
-        ClientDto responseClient = serviceClient.save(clientDto);
+        ClientDto responseClient = serviceClient.saveClient(clientDto);
         return responseClient;
     }
+
+    @GetMapping("/deleteClient/{id}")
+    void deleteClientById(@PathVariable Long id) {
+        serviceClient.deleteClientById(id);
+    }
+
 
     @GetMapping("/findAll")
     List<ClientDto> findAll(){

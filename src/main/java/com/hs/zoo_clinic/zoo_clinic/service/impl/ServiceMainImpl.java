@@ -32,11 +32,11 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
     }
 
     @Override
-    public ClientDto save(ClientDto clientDto) {
+    public ClientDto saveClient(ClientDto clientDto) {
         String nameMethod = "ClientDto save(ClientDto clientDto)";
         if (isNull(repositoryClient.findByLogin(clientDto.getLogin()))) {
-            Client client = repositoryClient.save(converterModelToDto.convertClientDtoToClient(clientDto));
             log.info(nameMethod + ": good request" + ServiceClient.class);
+            Client client = repositoryClient.save(converterModelToDto.convertClientDtoToClient(clientDto));
             return converterModelToDto.convertClientToClientDto(client);
         }
         log.info(nameMethod + ": bad request");
@@ -44,7 +44,7 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
     }
 
     @Override
-    public ClientDto findByLogin(String login) {
+    public ClientDto findClientByLogin(String login) {
         String nameMethod = "ClientDto findByLogin(String login)";
         Client findClient = repositoryClient.findByLogin(login);
         if (!isNull(findClient)) {
@@ -53,6 +53,34 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
         }
         log.info(nameMethod + ": bad request");
         return null;
+    }
+
+    @Override
+    public ClientDto getClientById(Long id) {
+        String nameMethod = "ClientDto getClientById(Long id)";
+        Client client = repositoryClient.getById(id);
+        if (!isNull(client)){
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+            return converterModelToDto.convertClientToClientDto(client);
+        }
+        log.info(nameMethod + ": bad request");
+        return null;
+    }
+
+    @Override
+    public void deleteClientById(Long id) {
+        String nameMethod = "void deleteClientById(Long id)";
+        Client client = repositoryClient.getById(id);
+
+        for (Animal animal: repositoryAnimal.findByClient_Id(id)) {
+            repositoryAnimal.deleteById(animal.getId());
+        }
+
+        repositoryClient.deleteById(id);
+        if (isNull(client)){
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+        }
+        log.info(nameMethod + ": bad request");
     }
 
     @Override
@@ -70,13 +98,36 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
     }
 
     @Override
-    public List<ClientDto> findAll() {
-        List<Client> clients = repositoryClient.findAll();
-        List<ClientDto> clientDtoList = new LinkedList<>();
-        for (Client client:clients) {
-            clientDtoList.add(converterModelToDto.convertClientToClientDto(client));
+    public List<AnimalDto> findAllAnimals() {
+        String nameMethod = "List<AnimalDto> findAllAnimals()";
+
+        List<Animal> animals = repositoryAnimal.findAll();
+        if (animals != null) {
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+            List<AnimalDto> animalDtoList = new LinkedList<>();
+            for (Animal animal : animals) {
+                animalDtoList.add(converterModelToDto.convertAnimalToAnimalDto(animal));
+            }
+            return animalDtoList;
         }
-        return clientDtoList;
+        log.info(nameMethod + ": bad request");
+        return null;
+    }
+
+    @Override
+    public List<ClientDto> findAll() {
+        String nameMethod = "List<ClientDto> findAll()";
+        List<Client> clients = repositoryClient.findAll();
+        if (clients != null) {
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+            List<ClientDto> clientDtoList = new LinkedList<>();
+            for (Client client : clients) {
+                clientDtoList.add(converterModelToDto.convertClientToClientDto(client));
+            }
+            return clientDtoList;
+        }
+        log.info(nameMethod + ": bad request");
+        return null;
     }
 
     private static boolean isNull(Client client) {
@@ -86,10 +137,11 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
     }
 
     @Override
-    public AnimalDto save(AnimalDto animalDto) {
+    public AnimalDto addPetToClientId(AnimalDto animalDto) {
         String nameMethod = "AnimalDto save(AnimalDto animalDto)";
-        Client client =repositoryClient.findByLogin(animalDto.getLoginOfClient());
+        Client client = repositoryClient.getById(animalDto.getClientId());
         if (!isNull(client)) {
+            log.info(nameMethod + ": good request" + ServiceClient.class);
             Animal animal = new Animal();
             animal.setNameOfAnimal(animalDto.getNameOfAnimal());
             animal.setTypeOfAnimal(animalDto.getTypeOfAnimal());
@@ -99,6 +151,17 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
             client.addAnimal(animal);
             repositoryClient.save(client);
             repositoryAnimal.save(animal);
+            return converterModelToDto.convertAnimalToAnimalDto(animal);
+        }
+        log.info(nameMethod + ": bad request");
+        return null;
+    }
+
+    @Override
+    public AnimalDto getAnimalById(Long id) {
+        String nameMethod = "AnimalDto getAnimalById(Long id)";
+        Animal animal = repositoryAnimal.getById(id);
+        if (animal != null) {
             log.info(nameMethod + ": good request" + ServiceClient.class);
             return converterModelToDto.convertAnimalToAnimalDto(animal);
         }
@@ -107,15 +170,31 @@ public class ServiceMainImpl implements ServiceClient, ServiceAnimal {
     }
 
     @Override
-    public List<AnimalResponse> findByClient_Id(Long id) {
-//        Optional<Client> client = repositoryClient.findById(id);
-
-        List<Animal> animals = repositoryAnimal.findByClient_Id(id);
-        List<AnimalResponse> animalDtoList = new ArrayList<>();
-        for (Animal animal:animals) {
-            animalDtoList.add(converterModelToDto.convertAnimalToAnimalResponse(animal));
+    public void deleteAnimalById(Long id) {
+        String nameMethod = "deleteAnimalById(Long id)";
+        repositoryAnimal.deleteById(id);
+        Animal animal = repositoryAnimal.getById(id);
+        if (animal != null) {
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+        } else {
+            log.info(nameMethod + ": bad request");
         }
+    }
 
-        return animalDtoList;
+    @Override
+    public List<AnimalResponse> findByClient_Id(Long id) {
+        String nameMethod = "List<AnimalResponse> findByClient_Id(Long id)";
+        List<Animal> animals = repositoryAnimal.findByClient_Id(id);
+        if (animals != null) {
+            log.info(nameMethod + ": good request" + ServiceClient.class);
+            List<AnimalResponse> animalDtoList = new ArrayList<>();
+            for (Animal animal : animals) {
+                animalDtoList.add(converterModelToDto.convertAnimalToAnimalResponse(animal));
+            }
+
+            return animalDtoList;
+        }
+        log.info(nameMethod + ": bad request");
+        return null;
     }
 }

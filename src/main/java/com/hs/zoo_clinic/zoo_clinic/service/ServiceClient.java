@@ -9,8 +9,10 @@ import com.hs.zoo_clinic.zoo_clinic.model.Animal;
 import java.util.List;
 
 public interface ServiceClient {
-    ClientDto save(ClientDto clientDto);
-    ClientDto findByLogin(String login);
+    ClientDto saveClient(ClientDto clientDto);
+    ClientDto findClientByLogin(String login);
+    ClientDto getClientById(Long id);
     AuthResponse findByLoginAndPassword(AuthClientDto auth);
     List<ClientDto> findAll();
+    void deleteClientById(Long id);
 }

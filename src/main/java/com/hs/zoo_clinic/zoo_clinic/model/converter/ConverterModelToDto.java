@@ -41,6 +41,7 @@ public class ConverterModelToDto implements ConverterDtoClient, ConverterDtoAnim
         animal.setTypeOfAnimal(animalDto.getTypeOfAnimal());
         animal.setAgeOfAnimal(animalDto.getAgeOfAnimal());
         animal.setWeightOfAnimal(animalDto.getWeightOfAnimal());
+        animal.setId(animalDto.getClientId());
 
         return animal;
     }
@@ -53,7 +54,7 @@ public class ConverterModelToDto implements ConverterDtoClient, ConverterDtoAnim
                 .typeOfAnimal(animal.getTypeOfAnimal())
                 .ageOfAnimal(animal.getAgeOfAnimal())
                 .weightOfAnimal(animal.getWeightOfAnimal())
-                .loginOfClient(animal.getClient().getLogin())   //login
+                .clientId(animal.getClient().getId())
                 .build();
         return animalDto;
     }

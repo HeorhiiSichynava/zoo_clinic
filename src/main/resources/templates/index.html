@@ -3,23 +3,26 @@
 
 <head>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script  defer src="request.js"></script>
+    <script defer src="request.js"></script>
     <title>Zoo clinic</title>
 </head>
-<body onload="registrationResult()"><br>
-<button type="button" onclick="regForm()">registration</button>
-<button type="button" onclick="addAnimalForm()">add pet</button>
-<button type="button" onclick="logForm()">log out</button>
 
+<body onload="getClientsList()"><br>
 
-<div id="table_response" class="table"></div>
-<br>
-<button type="button" onclick='registrationResult()'>update table clients</button>
-<br><br>
-<input type='text' id='find_by_client_id' value=""/> client id
+        <button type="button" class="button button1" onclick="closeForm()">Close</button>
+    <br><button type="button" class="button button1" onclick='getClientsList()'>Clients</button>
+    <br><button type="button" class="button button1" onclick='getAnimalsList()'>Animals</button>
+    <br><button type="button" class="button button1" onclick="regForm()">Registration</button>
+    <br><button type="button" class="button button1" onclick="addAnimalForm()">Add pet</button>
+    <br><button type="button" class="button button1" onclick="logForm()">Log out</button>
+    <br><button type="button" class="button button1" onclick="listAnimalsByClientIdForm()">Find</button>
 
-<button type="button" value="Send" name="Send" onclick='findByClientId()'>find</button>
-<br>
+<div class="container">
+    <div class="form-style-9">
+        <div id="response" class="center"></div>
+    </div>
+</div>
+
 
 </body>
 </html>
